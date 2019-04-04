@@ -2,3 +2,16 @@
   font-family: sans-serif;
   text-align: center;
 }
+label {
+  display: block;
+}
+
+.button-green {
+  background-color: green;
+  color: white;
+}
+
+.button-red {
+  background-color: red;
+  color: white;
+}
