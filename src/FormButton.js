@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import UseWindowWidthHook from "./UseWindowWidthHook";
 
 function FormButton(props) {
   const width = UseWindowWidthHook();
+
   function onClick(e) {
-    alert("clicked button");
     e.preventDefault();
   }
+
   return (
     <React.Fragment>
       <button

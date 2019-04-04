@@ -1,35 +1,42 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
+import useConversionHook from "./useConversionHook";
 
 function FormInput(props) {
   const [isError, setError] = useState();
-  const [inputValue, setInputValue] = useState("");
+  const [value, setInputValue] = useState("");
+  const convertedValue = useConversionHook(value);
+  let inputNumRef = useRef();
 
   function onBlur() {
     // Similar to this.setState({ isError: 'orange' })
     setError(true);
-    if (inputValue.length > 0) {
+    if (value.length > 0) {
       setError(false);
     }
   }
 
   function onChange(e) {
     // Similar to this.setState({ value: 'orange' })
-    setInputValue(e.target.value);
+    setInputValue(inputNumRef.current.value);
+    // OR e.target.value works too
   }
 
   return (
-    <React.Fragment>
-      <label htmlFor="form-input">Input element</label>
+    <div>
+      <label htmlFor="form-input">Celsius</label>
       <input
         id="form-input"
-        value={inputValue}
+        value={value}
         onBlur={onBlur}
         onChange={onChange}
-        ref={props.textInputRef}
+        ref={inputNumRef}
+        type="number"
       />
-
+      <br />
+      <br />
+      {convertedValue}
       {isError && <h5>There is an error - its empty</h5>}
-    </React.Fragment>
+    </div>
   );
 }
 
