@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-function useConversionHook(value) {
+function useConversionHook(type, value) {
   /*
   Creating a state here 'convertedValue' and this state can be 
   used by multiple components. That is why hooks are used. 
@@ -12,21 +12,23 @@ function useConversionHook(value) {
   you can think of useEffect Hook as componentDidMount, componentDidUpdate, 
   and componentWillUnmount combined
   */
-  console.log(value);
   const [convertedValue, setConversion] = useState();
   const [text, setText] = useState("");
 
   useEffect(() => {
-    if (value < 100) {
+    if (type === "temparature" && value < 100) {
       setConversion(value * 1.8 + 32);
       setText("In Farenheit: ");
+    }
+    if (type === "currency") {
+      setConversion(value * 72);
+      setText("In INR: ");
     }
     return () => {
       setConversion(value);
       setText("Above 100 is same: ");
     };
   });
-
   return [text, convertedValue];
 }
 

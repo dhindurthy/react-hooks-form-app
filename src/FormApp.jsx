@@ -6,7 +6,7 @@ import React from "react";
 
 function FormApp() {
   function onChange() {
-    console.log("in app change");
+    // console.log("in app change");
   }
 
   return (

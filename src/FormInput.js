@@ -4,7 +4,9 @@ import useConversionHook from "./useConversionHook";
 function FormInput(props) {
   const [isError, setError] = useState();
   const [value, setInputValue] = useState("");
-  const convertedValue = useConversionHook(value);
+  const [valueC, setInputValueC] = useState("");
+  const convertedValue = useConversionHook("temparature", value);
+  const convertedValueC = useConversionHook("currency", valueC);
   let inputNumRef = useRef();
 
   function onBlur() {
@@ -17,8 +19,14 @@ function FormInput(props) {
 
   function onChange(e) {
     // Similar to this.setState({ value: 'orange' })
-    setInputValue(inputNumRef.current.value);
+    setInputValue(e.target.value);
+    console.log("in form input change method");
     // OR e.target.value works too
+  }
+
+  function onChangeC(e) {
+    // Similar to this.setState({ value: 'orange' })
+    setInputValueC(e.target.value);
   }
 
   return (
@@ -33,8 +41,19 @@ function FormInput(props) {
         type="number"
       />
       <br />
-      <br />
       {convertedValue}
+      <br />
+      <br />
+      <label htmlFor="currency-input">Currency USD</label>
+      <input
+        id="currency-input"
+        value={valueC}
+        onChange={onChangeC}
+        ref={inputNumRef}
+        type="number"
+      />
+      <br />
+      {convertedValueC}
       {isError && <h5>There is an error - its empty</h5>}
     </div>
   );
