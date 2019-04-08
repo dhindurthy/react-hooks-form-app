@@ -16,6 +16,7 @@ function useConversionHook(type, value) {
   const [text, setText] = useState("");
 
   useEffect(() => {
+    console.log("effect functionality");
     switch (type) {
       case "temparature":
         if (value < 100) {

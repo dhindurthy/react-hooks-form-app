@@ -20,7 +20,6 @@ function FormInput(props) {
   function onChange(e) {
     // Similar to this.setState({ value: 'orange' })
     setInputValue(e.target.value);
-    console.log("in form input change method");
     // OR e.target.value works too
   }
 
