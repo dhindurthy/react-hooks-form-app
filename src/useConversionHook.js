@@ -15,8 +15,24 @@ function useConversionHook(type, value) {
   const [convertedValue, setConversion] = useState();
   const [text, setText] = useState("");
 
+  /**
+   * The below useCallback hook can be used if you dont want to put the logic
+   * inside the useEffect hook because sometime the same logic may be used
+   * in multiple useEffect hooks for whatever reason.
+   * This function useCallback can alo be located in the parent component while
+   * thc child component has the useEffect hook using the function of useCallback
+   */
+  /**
+   * Will not change unless `type` or `value` changes
+   */
+  // const setSomething = useCallback(() => {
+  //   doSomething()
+  //   return "whatever you want";
+  // }, [type, value]);
+
   useEffect(() => {
     console.log("effect functionality");
+    // const finalValues = setSomething()
     switch (type) {
       case "temparature":
         if (value < 100) {
@@ -36,13 +52,14 @@ function useConversionHook(type, value) {
         setText("In KG: ");
         break;
       default:
-      // setConversion("");
-      // setText("");
+        setText("Check your 'type' ");
     }
     return () => {
       setText("May be wrong 'type' ");
     };
+    // }, [setSomething]);
   }, [type, value]);
+  // return finalVlaues;
   return [text, convertedValue];
 }
 
