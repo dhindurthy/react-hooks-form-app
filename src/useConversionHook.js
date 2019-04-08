@@ -16,19 +16,32 @@ function useConversionHook(type, value) {
   const [text, setText] = useState("");
 
   useEffect(() => {
-    if (type === "temparature" && value < 100) {
-      setConversion(value * 1.8 + 32);
-      setText("In Farenheit: ");
-    }
-    if (type === "currency") {
-      setConversion(value * 72);
-      setText("In INR: ");
+    switch (type) {
+      case "temparature":
+        if (value < 100) {
+          setConversion(value * 1.8 + 32);
+          setText("In Farenheit: ");
+        } else {
+          setConversion(value);
+          setText("Above 100 is same: ");
+        }
+        break;
+      case "currency":
+        setConversion(value * 72);
+        setText("In INR: ");
+        break;
+      case "weight":
+        setConversion(value / 2.2046);
+        setText("In KG: ");
+        break;
+      default:
+      // setConversion("");
+      // setText("");
     }
     return () => {
-      setConversion(value);
-      setText("Above 100 is same: ");
+      setText("May be wrong 'type' ");
     };
-  });
+  }, [type, value]);
   return [text, convertedValue];
 }
 

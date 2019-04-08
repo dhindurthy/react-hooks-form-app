@@ -2,11 +2,11 @@ import React, { useState, useRef } from "react";
 import useConversionHook from "./useConversionHook";
 
 function FormInput(props) {
-  const [isError, setError] = useState();
-  const [value, setInputValue] = useState("");
-  const [valueC, setInputValueC] = useState("");
+  const [isError, setError] = useState(false);
+  const [value, setInputValue] = useState(0);
+  const [valueC, setInputValueC] = useState(0);
   const convertedValue = useConversionHook("temparature", value);
-  const convertedValueC = useConversionHook("currency", valueC);
+  const convertedValueC = useConversionHook("weight", valueC);
   let inputNumRef = useRef();
 
   function onBlur() {
