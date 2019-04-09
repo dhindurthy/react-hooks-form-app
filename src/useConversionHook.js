@@ -58,7 +58,7 @@ function useConversionHook(type, value) {
       setText("May be wrong 'type' ");
     };
     // }, [setSomething]);
-  }, [type, value]);
+  }, [type, value]); //need to have thse otherwise they wone be "observed"
   // return finalVlaues;
   return [text, convertedValue];
 }
